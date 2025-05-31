@@ -1,0 +1,251 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fractional CFO for fintech and AI startups. Raise $10M+ with predictive financial models trusted by Sequoia and a16z.">
+  <meta name="keywords" content="fractional CFO, startup funding, fintech, SaaS, AI, financial strategy, VC pitch">
+  <title>Fractional CFO for Startups | Raise $10M+ in 90 Days</title>
+  <link rel="icon" type="image/webp" href="/assets/favicon.webp">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="/js/animations.js"></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Strategic Financials",
+      "description": "Fractional CFO services for fintech, SaaS, and AI startups, delivering predictive financial models for Series A/B funding.",
+      "url": "https://strategicfinancials.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Samuel Mwendwa",
+        "jobTitle": "Lead Strategist"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="top-bar">
+    <p>🔒 Only 2 Strategy Call Slots Left This Week! <a href="#contact" class="underline font-semibold">Book Now</a></p>
+  </div>
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-text">Strategic Financials</span>
+        <p class="logo-subtext hidden md:block">Fractional CFO for High-Growth Startups</p>
+      </div>
+      <nav class="nav hidden md:flex" role="navigation" aria-label="Main Navigation">
+        <a href="#solutions" class="nav-link">Solutions</a>
+        <a href="#tools" class="nav-link">Tools</a>
+        <a href="#case-studies" class="nav-link">Case Studies</a>
+        <a href="#insights" class="nav-link">Insights</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <button id="mobile-menu-toggle" class="md:hidden" aria-label="Toggle Mobile Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden" role="navigation" aria-label="Mobile Navigation">
+      <button id="mobile-menu-close" aria-label="Close Mobile Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <a href="#solutions" class="nav-link">Solutions</a>
+      <a href="#tools" class="nav-link">Tools</a>
+      <a href="#case-studies" class="nav-link">Case Studies</a>
+      <a href="#insights" class="nav-link">Insights</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </header>
+  <main>
+    <section class="hero" role="region" aria-label="Hero Section">
+      <div class="container text-center text-white">
+        <h1 class="hero-headline">Raise $10M+ in 90 Days with a Fractional CFO</h1>
+        <p class="hero-subtext">We fix your deck, clarify metrics, and build VC-ready systems.</p>
+        <ul class="hero-bullets">
+          <li>No investor follow-ups? We make your deck fundable.</li>
+          <li>Messy metrics? We nail churn, CAC, and runway.</li>
+          <li>Broken models? We craft systems Sequoia trusts.</li>
+        </ul>
+        <p class="hero-testimonial">“Closed $22M in 8 weeks.” — Fintech CFO, UK</p>
+        <a href="#contact" class="btn-primary" role="button">Book a Free Strategy Call</a>
+      </div>
+    </section>
+    <section class="trust container fade-in" role="region" aria-label="Trust Section">
+      <h2 class="section-title">Trusted by Top Founders & VCs</h2>
+      <ul class="logo-list">
+        <li><img src="/assets/sequoia-logo.webp" alt="Sequoia Capital, trusted partner of Strategic Financials" loading="lazy" class="h-8"></li>
+        <li><img src="/assets/a16z-logo.webp" alt="Andreessen Horowitz, trusted partner of Strategic Financials" loading="lazy" class="h-8"></li>
+        <li><img src="/assets/yc-logo.webp" alt="Y Combinator, trusted partner of Strategic Financials" loading="lazy" class="h-8"></li>
+        <li><img src="/assets/paystream-logo.webp" alt="PayStream, client who raised $12M with Strategic Financials" loading="lazy" class="h-8"></li>
+      </ul>
+      <p class="quote">“Guided us to a $12M Series A with a deck that won Sequoia in one meeting.” — Alex Chen, PayStream CEO</p>
+    </section>
+    <section id="quiz" class="quiz container fade-in" role="region" aria-label="VC Readiness Quiz">
+      <h2 class="section-title">Is Your Startup VC-Ready?</h2>
+      <p class="section-subtext">Answer 3 questions to get a free funding readiness report.</p>
+      <form class="quiz-form">
+        <label for="arr" class="block">Annual Recurring Revenue ($)</label>
+        <input type="number" id="arr" placeholder="e.g., 1,000,000" min="0" required aria-required="true">
+        <label for="burn-rate" class="block">Monthly Burn Rate ($)</label>
+        <input type="number" id="burn-rate" placeholder="e.g., 50,000" min="0" required aria-required="true">
+        <label for="quiz-email" class="block">Email for Report</label>
+        <input type="email" id="quiz-email" placeholder="your@email.com" required aria-required="true">
+        <button type="button" onclick="submitQuiz()" class="btn-primary">Get Your Report</button>
+      </form>
+    </section>
+    <section id="solutions" class="solutions container fade-in" role="region" aria-label="Solutions Section">
+      <h2 class="section-title">Finance Systems for Fintech & AI Startups</h2>
+      <p class="section-subtext">We turn chaos into clarity for Seed to Series B startups. Consulting starts at $5K/month.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Finance Function Setup</h3>
+          <p>Build audit-ready accounting, controls, and investor reports.</p>
+        </div>
+        <div class="card">
+          <h3>IPO Readiness Roadmap</h3>
+          <p>Fix gaps, optimize capital, and prep for auditors.</p>
+        </div>
+        <div class="card">
+          <h3>Real-Time Dashboards</h3>
+          <p>Investor-grade KPI tracking in Power BI/Tableau.</p>
+        </div>
+      </div>
+      <a href="#contact" class="btn-primary">Request a Proposal</a>
+    </section>
+    <section id="tools" class="tools container fade-in" role="region" aria-label="Tools Section">
+      <h2 class="section-title">Investor-Grade Tools from $49</h2>
+      <p class="section-subtext">Used by 200+ CFOs to scale finance fast.</p>
+      <div class="grid">
+        <div class="card">
+          <picture>
+            <source srcset="/assets/financial-modeling-toolkit.webp" type="image/webp">
+            <img src="/assets/financial-modeling-toolkit.jpg" alt="Financial Modeling Toolkit with 3-statement model" loading="lazy">
+          </picture>
+          <h3>Financial Modeling Toolkit</h3>
+          <p>3-statement model, valuation, and runway calculator. $49–$199.</p>
+          <a href="/buy/financial-modeling-toolkit" class="btn-primary">Buy Now</a>
+        </div>
+        <div class="card">
+          <picture>
+            <source srcset="/assets/ipo-board-pack.webp" type="image/webp">
+            <img src="/assets/ipo-board-pack.jpg" alt="IPO Board Pack with roadmap checklist" loading="lazy">
+          </picture>
+          <h3>IPO Board Pack Kit</h3>
+          <p>Roadmap, reporting packs, and investor decks. $99–$299.</p>
+          <a href="/buy/ipo-board-pack" class="btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </section>
+    <section id="case-studies" class="case-studies container fade-in" role="region" aria-label="Case Studies Section">
+      <h2 class="section-title">Proven Results for Fintech Founders</h2>
+      <div class="grid">
+        <div class="card">
+          <a href="https://www.paystream.com" target="_blank">PayStream</a>
+          <h3>$12M Series A</h3>
+          <p>Cut burn by $350K/month, secured $12M from Sequoia.</p>
+          <p class="quote">“Their LTV/CAC model won in one meeting.” — Alex Chen, CEO</p>
+        </div>
+        <div class="card">
+          <a href="https://www.cloudcore.com" target="_blank">CloudCore</a>
+          <h3>$7M Seed</h3>
+          <p>Built a deck with 15+ scenarios, raised $7M from a16z.</p>
+          <p class="quote">“Their deck won a16z.” — Priya Patel, Founder</p>
+        </div>
+      </div>
+      <a href="/case-studies" class="btn-primary">See More Wins</a>
+    </section>
+    <section id="insights" class="insights container fade-in" role="region" aria-label="Insights Section">
+      <h2 class="section-title">Insights for Founders</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Fixing CAC Mistakes</h3>
+          <p>VCs want CAC by channel. Learn what they need. <a href="/insights/cac-mistakes">Read More</a></p>
+        </div>
+        <div class="card">
+          <h3>$7M SaaS Model</h3>
+          <p>The model that extended CloudCore’s runway. <a href="/insights/saas-model">Read More</a></p>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="contact container fade-in" role="region" aria-label="Contact Section">
+      <h2 class="section-title">Schedule Your Strategy Session</h2>
+      <p class="section-subtext">Send your deck—we’ll pinpoint what’s blocking your raise in one sentence.</p>
+      <form class="contact-form">
+        <label for="stage" class="block">Company Stage</label>
+        <select id="stage">
+          <option value="seed">Seed</option>
+          <option value="series-a">Series A</option>
+          <option value="series-b">Series B</option>
+        </select>
+        <label for="sector" class="block">Sector</label>
+        <select id="sector">
+          <option value="fintech">Fintech</option>
+          <option value="saas">SaaS</option>
+          <option value="ai">AI</option>
+        </select>
+        <label for="deck-upload" class="block">Upload Your Deck (Optional)</label>
+        <input type="file" id="deck-upload" accept=".pdf">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/strategicfinancials/strategy-call"></div>
+      </form>
+      <p class="contact-note">Can’t find a slot? <a href="mailto:hello@strategicfinancials.com">Email us</a>.</p>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://x.com/stratfinancials">Follow us on X</a>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <span>SOC 2 & GDPR Compliant</span>
+      </div>
+      <p>© 2025 Strategic Financials. All rights reserved.</p>
+    </div>
+  </footer>
+  <div id="cookies-banner" class="cookies-banner">
+    <p>We use cookies to improve your experience. <a href="/privacy-policy.html">Learn More</a>.</p>
+    <button onclick="acceptCookies()" class="btn-primary">Accept</button>
+  </div>
+  <script defer src="https://calendly.com/assets/external/widget.js"></script>
+  <script defer src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+:root {
+  --primary: #2F4F4F;
+  --accent: #2B6CB0;
+  --neutral: #F8FAFC;
+  --dark: #1A1A1A;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--dark);
+  background-color: var(--neutral);
+  margin: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.top-bar {
+  background-color: var(--accent);
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.header {
+  background-color: var(--primary);
+  color: white;
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.logo-text {
+  font-family: 'Lora', serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.logo-subtext {
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, #4A7A7A 100%);
+  padding: 64px 0;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 32px 0;
+  }
+}
+
+.hero-headline {
+  font-family: 'Lora', serif;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .hero-headline {
+    font-size: 32px;
+  }
+}
+
+.hero-subtext {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 16px;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-bullets li {
+  margin-bottom: 8px;
+}
+
+.hero-testimonial {
+  font-style: italic;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent);
+}
+
+.section-title {
+  font-family: 'Lora', serif;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.section-subtext {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.logo-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+}
+
+.quote {
+  font-style: italic;
+  text-align: center;
+  max-width: 600px;
+  margin: 16px auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.quiz-form,
+.contact-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.quiz-form label,
+.contact-form label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.quiz-form input,
+.contact-form input,
+.contact-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.calendly-inline-widget {
+  min-width: 320px;
+  height: 400px;
+}
+
+.contact-note {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.footer {
+  background-color: var(--dark);
+  color: white;
+  padding: 24px 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.cookies-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1024px) {
+  .container {
+    padding: 0 24px;
+  }
+}
