@@ -19,37 +19,54 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- Custom Styles -->
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #F9FAFB;
-    }
+ <!-- Custom Styles -->
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F9FAFB;
+  }
 
-    .sticky-nav {
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(6px);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-      z-index: 50;
-    }
+  .sticky-nav {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    z-index: 50;
+  }
 
-    .cta-glow {
-      animation: pulse 2.5s infinite;
-    }
+  .cta-glow {
+    animation: pulse 2.5s infinite;
+  }
 
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.5); }
-      50% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
-    }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.5); }
+    50% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
+  }
 
-    footer input[type="email"]::placeholder {
-      color: #9CA3AF;
+  footer input[type="email"]::placeholder {
+    color: #9CA3AF;
+  }
+  footer input[type="email"]:focus {
+    outline: 2px solid #FBBF24;
+    outline-offset: 2px;
+  }
+
+  /* 👇 Add subtlePulse here */
+  @keyframes subtlePulse {
+    0%, 100% {
+      transform: scale(1);
+      text-shadow: 0 0 0 rgba(99, 102, 241, 0.0);
     }
-    footer input[type="email"]:focus {
-      outline: 2px solid #FBBF24;
-      outline-offset: 2px;
+    50% {
+      transform: scale(1.015);
+      text-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
     }
-  </style>
+  }
+
+  .mentor-heading {
+    animation: subtlePulse 3.5s ease-in-out infinite;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+  }
+</style>
 </head>
 
 <body class="text-blue-900">
@@ -466,25 +483,41 @@
 
   </div>
 
-<!-- Mentor Thank You QR Code -->
-<section id="mentor-thank-you" class="text-center py-12">
-  <h2 class="text-3xl font-bold mb-4 text-indigo-700">
-    Honoring Our Mentors — Your Guidance Shapes Tomorrow’s Leaders
+<!-- Mentor Thank You Section -->
+<section id="mentor-thank-you" class="bg-white py-20 px-6 text-center relative overflow-hidden">
+  <!-- Animated Heading -->
+  <h2 class="mentor-heading text-3xl md:text-4xl font-extrabold mb-6 text-indigo-700 leading-snug tracking-tight">
+    Honoring Our Mentors —<br class="hidden md:inline" />
+    Your Guidance Shapes Tomorrow’s Leaders
   </h2>
-  <p class="mb-6 text-lg text-gray-800">
-    Your expertise fuels innovation and growth. Discover the stories of founders you’ve helped accelerate.
+
+  <!-- Supporting Copy -->
+  <p class="mb-8 text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
+    Your expertise fuels innovation and growth. This recognition is a small reflection of the lasting impact you're making on the next generation of founders.
   </p>
+
+  <!-- QR Code -->
   <img
     src="https://media.licdn.com/dms/image/v2/D4E22AQGsbYrnAlDqxA/feedshare-shrink_1280/B4EZcxRS9qHkAs-/0/1748878308808?e=1752105600&v=beta&t=4yr10xgQNgsP-g3FhqG2CoEtm4RoXi6wjRiYBX7JDho"
-    alt="Scan this QR code to see personalized mentor appreciation and impact stories"
-    class="max-w-xs mx-auto rounded-lg shadow-lg"
+    alt="Mentor QR Code"
+    class="max-w-xs mx-auto rounded-xl shadow-xl transition hover:scale-105 duration-300"
   />
-  <p class="mt-4 text-gray-700 italic">
-    Scan to explore your impact or visit our <a href="https://www.linkedin.com/posts/founder-institute-nigeria_founderinstitute-founderinstsitutelagos-filagos-activity-7335327294355357700-iDDf?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB2EeJ8BvZx7hSUAyADlbYghVUpr8EQS7BM" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">Mentor Thank You on LinkedIn</a>.
-  </p>
-  <p class="mt-2 text-sm text-gray-500">Tip: Use your phone camera or QR scanner app to unlock your recognition.</p>
-</section>
 
+  <!-- CTA -->
+  <p class="mt-6 text-gray-700 text-base italic">
+    Scan the code above or
+    <a
+      href="https://www.linkedin.com/posts/founder-institute-nigeria_founderinstitute-founderinstsitutelagos-filagos-activity-7335327294355357700-iDDf?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB2EeJ8BvZx7hSUAyADlbYghVUpr8EQS7BM"
+      target="_blank" rel="noopener noreferrer"
+      class="text-indigo-600 hover:text-indigo-800 font-medium underline"
+    >
+      view the official Mentor Thank You on LinkedIn
+    </a>.
+  </p>
+
+  <!-- Mobile Tip -->
+  <p class="mt-2 text-sm text-gray-500">📱 Use your phone’s camera to scan the QR code and unlock your recognition.</p>
+</section>
   
  <!-- Bottom Strip -->
 <footer>
