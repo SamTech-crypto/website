@@ -428,67 +428,6 @@
   </div>
 </section>
 
-<!-- Smooth Scroll with Sticky Nav Offset -->
-<script>
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const target = document.getElementById(targetId);
-      const navHeight = document.querySelector('.sticky-nav').offsetHeight;
-
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - navHeight - 10, // 10px extra padding
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-</script>
-
-<!-- OFFER LADDER SECTION -->
-<section id="offers" class="bg-blue-900 py-20 px-6 md:px-16 lg:px-32 max-w-6xl mx-auto text-white">
-  <h2 class="text-3xl font-extrabold mb-12 text-center">Investor-Calibrated Offer Ladder</h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-    <!-- Tier 1: Funding Risk Audit™ -->
-    <div class="bg-blue-800 rounded-lg shadow-lg p-8 flex flex-col">
-      <h3 class="text-xl font-extrabold mb-4 text-yellow-400">Funding Risk Audit™</h3>
-      <p class="flex-grow mb-6 text-gray-300 leading-relaxed">
-        Identify hidden risks in your fundraising strategy. Get a tailored report with actionable fixes to boost investor confidence and reduce deal friction.
-      </p>
-      <p class="font-semibold text-yellow-400 mb-6">$799 one-time</p>
-      <a href="#scorecard" class="mt-auto inline-block bg-yellow-400 text-blue-900 font-bold py-3 px-6 rounded hover:bg-yellow-300 transition text-center">
-        → Take the Audit Quiz
-      </a>
-    </div>
-
-    <!-- Tier 2: VC-Ready Model Builder™ -->
-    <div class="bg-yellow-400 rounded-lg shadow-lg p-8 flex flex-col text-blue-900">
-      <h3 class="text-xl font-extrabold mb-4">VC-Ready Model Builder™</h3>
-      <p class="flex-grow mb-6 leading-relaxed">
-        Build dynamic, investor-grade financial models with ease. Our step-by-step framework equips you with scenarios, forecasts, and risk mitigation strategies tailored for VC success.
-      </p>
-      <p class="font-semibold mb-6">$2,499 package</p>
-      <a href="#contact" class="mt-auto inline-block bg-blue-900 text-yellow-400 font-bold py-3 px-6 rounded hover:bg-blue-800 transition text-center">
-        → Build Your Model
-      </a>
-    </div>
-
-    <!-- Tier 3: Smart Scale CFO™ -->
-    <div class="bg-blue-800 rounded-lg shadow-lg p-8 flex flex-col">
-      <h3 class="text-xl font-extrabold mb-4 text-yellow-400">Smart Scale CFO™</h3>
-      <p class="flex-grow mb-6 text-gray-300 leading-relaxed">
-        Get ongoing CFO advisory and financial leadership tailored for scaling startups. From fundraising support to operational finance, maximize growth with expert guidance.
-      </p>
-      <p class="font-semibold text-yellow-400 mb-6">Monthly retainer</p>
-      <a href="#contact" class="mt-auto inline-block bg-yellow-400 text-blue-900 font-bold py-3 px-6 rounded hover:bg-yellow-300 transition text-center">
-        → Schedule a Consultation
-      </a>
-    </div>
-  </div>
-</section>
 <footer class="bg-gray-900 text-gray-300 py-10 mt-20">
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
     
