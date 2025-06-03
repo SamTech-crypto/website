@@ -175,8 +175,7 @@
   ];
 
   let currentQuestionIndex = 0;
-  let totalScore = 0;
-  let selectedAnswerIndex = null;
+  let selectedAnswers = Array(quizData.length).fill(null);
 
   const questionEl = document.getElementById('quiz-question');
   const answersEl = document.getElementById('quiz-answers');
@@ -192,16 +191,19 @@
     const currentQuestion = quizData[currentQuestionIndex];
     questionEl.textContent = currentQuestion.question;
     answersEl.innerHTML = '';
-    selectedAnswerIndex = null;
-    nextBtn.disabled = true;
+    const selectedAnswerIndex = selectedAnswers[currentQuestionIndex];
+    nextBtn.disabled = selectedAnswerIndex === null;
 
     currentQuestion.answers.forEach((answer, index) => {
       const btn = document.createElement('button');
       btn.textContent = answer.text;
       btn.className = "py-3 px-4 rounded border border-blue-400 text-blue-700 hover:bg-yellow-400 hover:text-blue-900 transition font-medium text-left";
       btn.style.width = '100%';
+      if (index === selectedAnswerIndex) {
+        btn.classList.add('bg-yellow-400', 'text-blue-900');
+      }
       btn.addEventListener('click', () => {
-        selectedAnswerIndex = index;
+        selectedAnswers[currentQuestionIndex] = index;
         nextBtn.disabled = false;
         // Highlight selected answer
         Array.from(answersEl.children).forEach(child => child.classList.remove('bg-yellow-400', 'text-blue-900'));
@@ -211,10 +213,10 @@
     });
 
     // Update progress bar
-    const progressPercent = ((currentQuestionIndex) / quizData.length) * 100;
-    progressBarEl.style.width = ${progressPercent}%;
+    const progressPercent = (currentQuestionIndex / quizData.length) * 100;
+    progressBarEl.style.width = progressPercent + '%';
 
-    // Handle prev button enable
+    // Enable/disable previous button
     prevBtn.disabled = currentQuestionIndex === 0;
   }
 
@@ -226,8 +228,7 @@
   });
 
   nextBtn.addEventListener('click', () => {
-    if (selectedAnswerIndex === null) return;
-    totalScore += quizData[currentQuestionIndex].answers[selectedAnswerIndex].score;
+    if (selectedAnswers[currentQuestionIndex] === null) return;
     currentQuestionIndex++;
     if (currentQuestionIndex < quizData.length) {
       loadQuestion();
@@ -239,10 +240,14 @@
   function showResults() {
     quizContainer.style.display = 'none';
     resultsSection.classList.remove('hidden');
-    // Calculate and show score
-    scoreValueEl.textContent = ${totalScore} / ${quizData.length * 10};
 
-    // Generate message based on score
+    // Calculate total score
+    const totalScore = selectedAnswers.reduce((acc, answerIndex, idx) => {
+      return acc + (answerIndex !== null ? quizData[idx].answers[answerIndex].score : 0);
+    }, 0);
+
+    scoreValueEl.textContent = totalScore + " / " + (quizData.length * 10);
+
     let message = '';
     if (totalScore >= 35) {
       message = "Excellent! You're VC-ready and well positioned for your next funding round.";
@@ -256,6 +261,8 @@
 
   // Initialize quiz on page load
   loadQuestion();
+</script>
+
 </script>
 <!-- KPIs & PROOF ASSETS SECTION -->
 <section id="proof" class="bg-white py-16 px-6 md:px-16 lg:px-32 max-w-6xl mx-auto">
