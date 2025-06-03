@@ -175,7 +175,8 @@
   ];
 
   let currentQuestionIndex = 0;
-  let selectedAnswers = Array(quizData.length).fill(null);
+  let selectedAnswerIndex = null;
+  const selectedAnswers = Array(quizData.length).fill(null);
 
   const questionEl = document.getElementById('quiz-question');
   const answersEl = document.getElementById('quiz-answers');
@@ -191,7 +192,7 @@
     const currentQuestion = quizData[currentQuestionIndex];
     questionEl.textContent = currentQuestion.question;
     answersEl.innerHTML = '';
-    const selectedAnswerIndex = selectedAnswers[currentQuestionIndex];
+    selectedAnswerIndex = selectedAnswers[currentQuestionIndex];
     nextBtn.disabled = selectedAnswerIndex === null;
 
     currentQuestion.answers.forEach((answer, index) => {
@@ -199,12 +200,16 @@
       btn.textContent = answer.text;
       btn.className = "py-3 px-4 rounded border border-blue-400 text-blue-700 hover:bg-yellow-400 hover:text-blue-900 transition font-medium text-left";
       btn.style.width = '100%';
-      if (index === selectedAnswerIndex) {
+
+      if (selectedAnswerIndex === index) {
         btn.classList.add('bg-yellow-400', 'text-blue-900');
       }
+
       btn.addEventListener('click', () => {
+        selectedAnswerIndex = index;
         selectedAnswers[currentQuestionIndex] = index;
         nextBtn.disabled = false;
+
         // Highlight selected answer
         Array.from(answersEl.children).forEach(child => child.classList.remove('bg-yellow-400', 'text-blue-900'));
         btn.classList.add('bg-yellow-400', 'text-blue-900');
@@ -213,10 +218,10 @@
     });
 
     // Update progress bar
-    const progressPercent = (currentQuestionIndex / quizData.length) * 100;
+    const progressPercent = ((currentQuestionIndex) / quizData.length) * 100;
     progressBarEl.style.width = progressPercent + '%';
 
-    // Enable/disable previous button
+    // Handle prev button enable
     prevBtn.disabled = currentQuestionIndex === 0;
   }
 
@@ -228,9 +233,9 @@
   });
 
   nextBtn.addEventListener('click', () => {
-    if (selectedAnswers[currentQuestionIndex] === null) return;
-    currentQuestionIndex++;
-    if (currentQuestionIndex < quizData.length) {
+    if (selectedAnswerIndex === null) return;
+    if (currentQuestionIndex < quizData.length - 1) {
+      currentQuestionIndex++;
       loadQuestion();
     } else {
       showResults();
@@ -241,7 +246,6 @@
     quizContainer.style.display = 'none';
     resultsSection.classList.remove('hidden');
 
-    // Calculate total score
     const totalScore = selectedAnswers.reduce((acc, answerIndex, idx) => {
       return acc + (answerIndex !== null ? quizData[idx].answers[answerIndex].score : 0);
     }, 0);
@@ -257,6 +261,11 @@
       message = "You have some foundational work to do before approaching VCs. Let's help you get there.";
     }
     scoreMessageEl.textContent = message;
+
+    // Auto-refresh after 5 seconds
+    setTimeout(() => {
+      location.reload();
+    }, 5000);
   }
 
   // Initialize quiz on page load
@@ -405,7 +414,7 @@
         <button type="submit" class="bg-yellow-400 text-gray-900 font-semibold px-4 py-2 rounded-md hover:bg-yellow-300 transition">Join</button>
       </form>
       <p class="text-xs text-gray-500 mt-3">
-        Or email us directly: <a href="mailto:nexlifysolutions.team@gmail.com" class="underline hover:text-yellow-400">team@vclaunchpad.com</a>
+        Or email us directly: <a href="mailto:nexlifysolutions.team@gmail.com" class="underline hover:text-yellow-400">nexlifysolutions.team@gmail.com</a>
       </p>
     </div>
 
